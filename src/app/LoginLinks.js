@@ -28,7 +28,7 @@ const LoginLinks = () => {
                         href="/register"
                         className="ml-4 text-sm text-gray-700 underline"
                     >
-                        Register
+                        Registrar
                     </Link>
                 </>
             )}

@@ -10,6 +10,7 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import AuthSessionStatus from '@/app/(auth)/AuthSessionStatus'
 
+
 const Login = () => {
     const router = useRouter()
 
@@ -46,6 +47,9 @@ const Login = () => {
 
     return (
         <>
+                <AuthSessionStatus className="mb-4" status={status} />
+                <h1 className="text-center text-2xl font-bold mb-4">Acesso Administrativo</h1>
+
             <AuthSessionStatus className="mb-4" status={status} />
             <form onSubmit={submitForm}>
                 {/* Email Address */}
@@ -67,7 +71,7 @@ const Login = () => {
 
                 {/* Password */}
                 <div className="mt-4">
-                    <Label htmlFor="password">Password</Label>
+                    <Label htmlFor="password">Senha</Label>
 
                     <Input
                         id="password"
@@ -101,18 +105,12 @@ const Login = () => {
                         />
 
                         <span className="ml-2 text-sm text-gray-600">
-                            Remember me
+                            Lembrar-me
                         </span>
                     </label>
                 </div>
 
                 <div className="flex items-center justify-end mt-4">
-                    <Link
-                        href="/forgot-password"
-                        className="underline text-sm text-gray-600 hover:text-gray-900">
-                        Forgot your password?
-                    </Link>
-
                     <Button className="ml-3">Login</Button>
                 </div>
             </form>
