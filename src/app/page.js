@@ -1,7 +1,7 @@
 import LoginLinks from '@/app/LoginLinks'
 
 export const metadata = {
-    title: 'Laravel',
+    title: 'Painel Administrativo - Loja',
 }
 
 const Home = () => {
