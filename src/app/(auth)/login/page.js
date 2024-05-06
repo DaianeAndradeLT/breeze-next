@@ -4,12 +4,10 @@ import Button from '@/components/Button'
 import Input from '@/components/Input'
 import InputError from '@/components/InputError'
 import Label from '@/components/Label'
-import Link from 'next/link'
 import { useAuth } from '@/hooks/auth'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import AuthSessionStatus from '@/app/(auth)/AuthSessionStatus'
-
 
 const Login = () => {
     const router = useRouter()
@@ -47,8 +45,10 @@ const Login = () => {
 
     return (
         <>
-                <AuthSessionStatus className="mb-4" status={status} />
-                <h1 className="text-center text-2xl font-bold mb-4">Acesso Administrativo</h1>
+            <AuthSessionStatus className="mb-4" status={status} />
+            <h1 className="text-center text-2xl font-bold mb-4">
+                Acesso Administrativo
+            </h1>
 
             <AuthSessionStatus className="mb-4" status={status} />
             <form onSubmit={submitForm}>
@@ -83,10 +83,7 @@ const Login = () => {
                         autoComplete="current-password"
                     />
 
-                    <InputError
-                        messages={errors.password}
-                        className="mt-2"
-                    />
+                    <InputError messages={errors.password} className="mt-2" />
                 </div>
 
                 {/* Remember Me */}
