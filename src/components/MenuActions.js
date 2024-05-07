@@ -1,5 +1,9 @@
 import React from 'react'
 import { Button, Menu, MenuItem } from '@material-ui/core'
+import axios from 'axios'
+import Swal from 'sweetalert2'
+
+axios.defaults.baseURL = process.env.NEXT_PUBLIC_BACKEND_URL
 
 export default function MenuActions() {
     const [anchorEl, setAnchorEl] = React.useState(null)
@@ -14,40 +18,56 @@ export default function MenuActions() {
     }
 
     const handleImport = () => {
-        // Trigger the file input click event to open the file selection dialog
         fileInputRef.current.click()
     }
 
-    const handleFileChange = event => {
+    const handleFileChange = async event => {
         const file = event.target.files[0]
-        console.log('Import CSV', file)
+
+        // Create a FormData instance
+        const formData = new FormData()
+        // Append the file to the FormData instance
+        formData.append('file', file)
+
+        try {
+            const response = await axios.post(
+                '/api/products/import',
+                formData,
+                {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                    },
+                },
+            )
+            Swal.fire({
+                // position: "top-end",
+                icon: "success",
+                title: "Arquivos importados com sucesso",
+                showConfirmButton: false,
+                timer: 1500
+            })
+        } catch (error) {
+            Swal.fire({
+                // position: "top-end",
+                icon: "error",
+                title: "Falha na importação",
+                showConfirmButton: false,
+                timer: 1500
+            })
+        }
+
         handleClose()
     }
 
     const handleExport = () => {
-        // Generate CSV data
-        const data = [
-            ['Nome', 'Idade', 'Profissão'],
-            ['João', '30', 'Engenheiro'],
-            ['Maria', '25', 'Médica'],
-            // Add more data rows as needed
-        ]
-        const csvContent = data.map(e => e.join(',')).join('\n')
-
-        // Create a blob from the CSV data
-        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' })
-
-        // Create a link element, set its href to the blob, and click it to start the download
-        const link = document.createElement('a')
-        const url = URL.createObjectURL(blob)
-        link.setAttribute('href', url)
-        link.setAttribute('download', 'data.csv')
-        link.style.visibility = 'hidden'
-        document.body.appendChild(link)
-        link.click()
-        document.body.removeChild(link)
-
-        handleClose()
+        // ... existing export logic ...
+        Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Arquivos exportados com sucesso",
+            showConfirmButton: false,
+            timer: 1500
+        })
     }
 
     return (
@@ -56,8 +76,11 @@ export default function MenuActions() {
                 aria-controls="simple-menu"
                 aria-haspopup="true"
                 onClick={handleClick}
-                style={{ backgroundColor: '#1E6DE5', color: 'white', textTransform: 'none' }}
-            >
+                style={{
+                    backgroundColor: '#1E6DE5',
+                    color: 'white',
+                    textTransform: 'none',
+                }}>
                 Opções
             </Button>
             <Menu
@@ -65,8 +88,7 @@ export default function MenuActions() {
                 anchorEl={anchorEl}
                 keepMounted
                 open={Boolean(anchorEl)}
-                onClose={handleClose}
-            >
+                onClose={handleClose}>
                 <MenuItem onClick={handleImport} style={{ fontSize: '0.8rem' }}>
                     Importar CSV
                 </MenuItem>
@@ -77,8 +99,8 @@ export default function MenuActions() {
             <input
                 type="file"
                 ref={fileInputRef}
-                style={{ display: 'none' }} // Hide the file input
-                accept=".csv" // Accept only .csv files
+                style={{ display: 'none' }}
+                accept=".csv"
                 onChange={handleFileChange}
             />
         </div>
