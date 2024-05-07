@@ -40,7 +40,6 @@ export default function MenuActions() {
                 },
             )
             Swal.fire({
-                // position: "top-end",
                 icon: "success",
                 title: "Arquivos importados com sucesso",
                 showConfirmButton: false,
@@ -48,7 +47,6 @@ export default function MenuActions() {
             })
         } catch (error) {
             Swal.fire({
-                // position: "top-end",
                 icon: "error",
                 title: "Falha na importação",
                 showConfirmButton: false,
