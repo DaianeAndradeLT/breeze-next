@@ -1,91 +1,72 @@
-# Laravel Breeze - Next.js Edition ▲
+# Documentação: Configuração e Execução do Projeto
 
-## Introduction
+Este guia fornece instruções passo a passo para configurar e executar o projeto localmente.
 
-This repository is an implementation of the [Laravel Breeze](https://laravel.com/docs/starter-kits) application / authentication starter kit frontend in [Next.js](https://nextjs.org). All of the authentication boilerplate is already written for you - powered by [Laravel Sanctum](https://laravel.com/docs/sanctum), allowing you to quickly begin pairing your beautiful Next.js frontend with a powerful Laravel backend.
+Este projeto é composto por duas partes:
 
-## Official Documentation
+- Repositório do Backend: [simple-api-integration](https://github.com/DaianeAndradeLT/simple-api-integration)
+- Repositório do Frontend: [breeze-next](https://github.com/DaianeAndradeLT/breeze-next)
 
-### Installation
+## Pré-requisitos
 
-First, create a Next.js compatible Laravel backend by installing Laravel Breeze into a [fresh Laravel application](https://laravel.com/docs/installation) and installing Breeze's API scaffolding:
+Antes de iniciar, certifique-se de ter os seguintes requisitos instalados em sua máquina:
 
-```bash
-# Create the Laravel application...
-laravel new next-backend
+- [Node.js](https://nodejs.org/) >= 12.x
+- [npm](https://www.npmjs.com/) ou [Yarn](https://yarnpkg.com/)
 
-cd next-backend
+## Configuração do Frontend
 
-# Install Breeze and dependencies...
-composer require laravel/breeze --dev
+1. Clone o repositório do projeto frontend:
 
-php artisan breeze:install api
+    ```bash
+    git clone https://github.com/DaianeAndradeLT/breeze-next
+    ```
 
-# Run database migrations...
-php artisan migrate
-```
+   Repositório do Frontend: [breeze-next](https://github.com/DaianeAndradeLT/breeze-next)
 
-Next, ensure that your application's `APP_URL` and `FRONTEND_URL` environment variables are set to `http://localhost:8000` and `http://localhost:3000`, respectively.
+2. Navegue até o diretório do projeto frontend:
 
-After defining the appropriate environment variables, you may serve the Laravel application using the `serve` Artisan command:
+    ```bash
+    cd <diretorio_do_projeto_frontend>
+    ```
 
-```bash
-# Serve the application...
-php artisan serve
-```
+3. Instale as dependências do Yarn:
 
-Next, clone this repository and install its dependencies with `yarn install` or `npm install`. Then, copy the `.env.example` file to `.env.local` and supply the URL of your backend:
+    ```bash
+    yarn install
+    ```
 
-```
-NEXT_PUBLIC_BACKEND_URL=http://localhost:8000
-```
+4. Inicie o servidor de desenvolvimento:
 
-Finally, run the application via `npm run dev`. The application will be available at `http://localhost:3000`:
+    ```bash
+    yarn dev
+    ```
 
-```
-npm run dev
-```
+   O servidor será iniciado em `http://localhost:3000`.
 
-> Note: Currently, we recommend using `localhost` during local development of your backend and frontend to avoid CORS "Same-Origin" issues.
+## Acesso ao Projeto
 
-### Authentication Hook
+Se tudo correr bem, esperamos que o servidor esteja rodando em:
 
-This Next.js application contains a custom `useAuth` React hook, designed to abstract all authentication logic away from your pages. In addition, the hook can be used to access the currently authenticated user:
+- Frontend: `http://localhost:3000`
 
-```js
-const ExamplePage = () => {
-    const { logout, user } = useAuth({ middleware: 'auth' })
+# Documentação: conhecendo o projeto
 
-    return (
-        <>
-            <p>{user?.name}</p>
+## Estrutura de Código
 
-            <button onClick={logout}>Sign out</button>
-        </>
-    )
-}
+O código do frontend segue uma estrutura comum para projetos Next.js e React, e inclui as seguintes pastas e arquivos:
 
-export default ExamplePage
-```
+- `pages`: Contém as páginas da aplicação, onde cada arquivo corresponde a uma rota acessível.
+- `components`: Contém componentes reutilizáveis em toda a aplicação.
+- `styles`: Contém arquivos de estilo da aplicação, utilizando Tailwind CSS.
+- `public`: Contém arquivos estáticos, como imagens e fontes.
 
-> Note: You will need to use [optional chaining](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining) (`user?.name` instead of `user.name`) when accessing properties on the user object to account for Next.js's initial server-side render.
+## Bibliotecas Principais Utilizadas
 
-### Named Routes
+O projeto frontend utiliza as seguintes bibliotecas principais:
 
-For convenience, [Ziggy](https://github.com/tighten/ziggy#spas-or-separate-repos) may be used to reference your Laravel application's named route URLs from your React application.
+- **React:** Biblioteca JavaScript para criar interfaces de usuário.
+- **Next.js:** Framework React que permite a renderização do lado do servidor e a geração de páginas estáticas.
+- **Tailwind CSS:** Framework de CSS utilitário para criação rápida de estilos.
 
-## Contributing
-
-Thank you for considering contributing to Breeze Next! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-Please review [our security policy](https://github.com/laravel/breeze-next/security/policy) on how to report security vulnerabilities.
-
-## License
-
-Laravel Breeze Next is open-sourced software licensed under the [MIT license](LICENSE.md).
+Além disso, outras bibliotecas foram utilizadas para funcionalidades específicas, como manipulação de requisições HTTP, estilos, e componentes de UI.
