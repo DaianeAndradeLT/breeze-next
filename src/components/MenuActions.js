@@ -30,27 +30,21 @@ export default function MenuActions() {
         formData.append('file', file)
 
         try {
-            const response = await axios.post(
-                '/api/products/import',
-                formData,
-                {
-                    headers: {
-                        'Content-Type': 'multipart/form-data',
-                    },
-                },
-            )
+            await axios.post('/api/products/import', formData, {
+                headers: { 'Content-Type': `multipart/form-data` },
+            })
             Swal.fire({
-                icon: "success",
-                title: "Arquivos importados com sucesso",
+                icon: 'success',
+                title: 'Arquivos importados com sucesso',
                 showConfirmButton: false,
-                timer: 1500
+                timer: 1500,
             })
         } catch (error) {
             Swal.fire({
-                icon: "error",
-                title: "Falha na importação",
+                icon: 'error',
+                title: 'Falha na importação',
                 showConfirmButton: false,
-                timer: 1500
+                timer: 1500,
             })
         }
 
@@ -58,13 +52,11 @@ export default function MenuActions() {
     }
 
     const handleExport = () => {
-        // ... existing export logic ...
         Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: "Arquivos exportados com sucesso",
+            icon: 'success',
+            title: 'Arquivos exportados com sucesso',
             showConfirmButton: false,
-            timer: 1500
+            timer: 1500,
         })
     }
 
