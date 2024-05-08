@@ -51,15 +51,37 @@ export default function MenuActions() {
         handleClose()
     }
 
-    const handleExport = () => {
-        Swal.fire({
-            icon: 'success',
-            title: 'Arquivos exportados com sucesso',
-            showConfirmButton: false,
-            timer: 1500,
-        })
-    }
+    // const handleExport = () => {
+    //     Swal.fire({
+    //         icon: 'success',
+    //         title: 'Arquivos exportados com sucesso',
+    //         showConfirmButton: false,
+    //         timer: 1500,
+    //     })
+    // }
 
+    // faz um export usando a fução exportar csv do meu menu actions
+
+    // }
+    const handleExport = () => {
+        axios
+            .get('/api/products/export', {
+                responseType: 'blob',
+            })
+            .then(response => {
+                const url = window.URL.createObjectURL(
+                    new Blob([response.data]),
+                )
+                const link = document.createElement('a')
+
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Arquivo gerado com sucesso!',
+                    html: `<a href="${url}" download="products.csv" class="text-white bg-blue-700 hover:bg-blue-800 font-medium text-sm rounded-lg px-4 py-2 border border-blue-700 inline-block mt-4">Baixar arquivo CSV</a>`,
+                    showConfirmButton: false,
+                })
+            })
+    }
     return (
         <div>
             <Button
@@ -67,7 +89,7 @@ export default function MenuActions() {
                 aria-haspopup="true"
                 onClick={handleClick}
                 style={{
-                    backgroundColor: '#1E6DE5',
+                    backgroundColor: '#1D4ED8',
                     color: 'white',
                     textTransform: 'none',
                 }}>

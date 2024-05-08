@@ -63,7 +63,10 @@ const Products = () => {
                 }
 
                 // Envia os dados para o servidor
-                return axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/products`, {
+                return axios
+                    .post(
+                        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/products`,
+                        {
                             title,
                             price,
                             description,
