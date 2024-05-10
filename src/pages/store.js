@@ -12,7 +12,7 @@ export const metadata = {
     title: 'Loja Virtual',
 }
 
-const Products = () => {
+const Store = () => {
     const [products, setProducts] = useState([])
     let url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/products`
 
@@ -20,7 +20,7 @@ const Products = () => {
         Swal.fire({
             title: 'Criar Produto',
             html: `
-            <form id="create-product-form">
+                <form id="create-product-form">
                 <div class="flex flex-wrap">
                     <label for="title" class="block">Título:</label>
                     <input type="text" id="title" name="title" class="w-full mt-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" required>
@@ -42,11 +42,11 @@ const Products = () => {
                     <input type="text" id="category" name="category" class="w-full mt-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" required>
                 </div>
             </form>
-        `,
+            `,
             confirmButtonText: 'Criar',
             showCancelButton: true,
             focusConfirm: false,
-            preConfirm: () => {
+            preConfirm: async () => {
                 const form = document.getElementById('create-product-form')
                 const title = form.querySelector('#title').value
                 const price = form.querySelector('#price').value
@@ -62,7 +62,6 @@ const Products = () => {
                     return false
                 }
 
-                // Envia os dados para o servidor
                 return axios
                     .post(
                         `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/products`,
@@ -149,4 +148,4 @@ const Products = () => {
         </AppLayout>
     )
 }
-export default Products
+export default Store
