@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios'
 import Swal from 'sweetalert2'
+
 
 const Table = ({ columns, data }) => {
     function populateForm(row) {
@@ -90,64 +91,64 @@ const Table = ({ columns, data }) => {
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
             <table className="w-full text-sm text-left text-gray-500">
                 <thead className="bg-gray-200 text-gray-900 font-bold">
-                    <tr>
-                        {columns.map((column, index) => (
-                            <th
-                                key={index}
-                                className="px-2 py-1 text-left text-xs font-medium text-gray-500 uppercase tracking-wider max-w-xs">
-                                {column}
-                            </th>
-                        ))}
-                        <th className="px-2 py-1 text-left text-xs font-medium text-gray-500 uppercase tracking-wider max-w-xs">
-                            Ações
+                <tr>
+                    {columns.map((column, index) => (
+                        <th
+                            key={index}
+                            className="px-2 py-1 text-left text-xs font-medium text-gray-500 uppercase tracking-wider max-w-xs">
+                            {column}
                         </th>
-                    </tr>
+                    ))}
+                    <th className="px-2 py-1 text-left text-xs font-medium text-gray-500 uppercase tracking-wider max-w-xs">
+                        Ações
+                    </th>
+                </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200 ">
-                    {data.map((row, index) => (
-                        <tr key={index} className="hover:bg-gray-300">
-                            {columns.map((column, colIndex) => {
-                                const [isExpanded, setIsExpanded] = useState(
-                                    false,
-                                )
-                                const textValue =
-                                    typeof row[column] === 'string'
-                                        ? row[column]
-                                        : row[column].toString()
-                                const text = isExpanded
-                                    ? textValue
-                                    : `${textValue.substring(0, 20)}...`
-                                return (
-                                    <td
-                                        key={colIndex}
-                                        className="px-2 py-1 whitespace-normal max-w-xs cursor-pointer"
-                                        title={textValue}
-                                        onClick={() =>
-                                            setIsExpanded(!isExpanded)
-                                        }>
-                                        {text}
-                                    </td>
-                                )
-                            })}
-                            <td className="px-2 py-1 whitespace-normal max-w-xs">
-                                <button className={'ml-2'} onClick={() => {}}>
-                                    <FontAwesomeIcon
-                                        icon={faEdit}
-                                        color="#4b4b4b"
-                                        onClick={() => populateForm(row)}
-                                    />
-                                </button>
-                                <button
-                                    className="ml-2"
-                                    onClick={() => handleDeleteProduct(row)}>
-                                    <FontAwesomeIcon
-                                        icon={faTrash}
-                                        color="#4b4b4b"
-                                    />
-                                </button>
-                            </td>
-                        </tr>
-                    ))}
+                {data.map((row, index) => (
+                    <tr key={index} className="hover:bg-gray-300">
+                        {columns.map((column, colIndex) => {
+                            const [isExpanded, setIsExpanded] = useState(
+                                false,
+                            )
+                            const textValue =
+                                typeof row[column] === 'string'
+                                    ? row[column]
+                                    : row[column].toString()
+                            const text = isExpanded
+                                ? textValue
+                                : `${textValue.substring(0, 20)}...`
+                            return (
+                                <td
+                                    key={colIndex}
+                                    className="px-2 py-1 whitespace-normal max-w-xs cursor-pointer"
+                                    title={textValue}
+                                    onClick={() =>
+                                        setIsExpanded(!isExpanded)
+                                    }>
+                                    {text}
+                                </td>
+                            )
+                        })}
+                        <td className="px-2 py-1 whitespace-normal max-w-xs">
+                            <button className={'ml-2'} onClick={() => {}}>
+                                <FontAwesomeIcon
+                                    icon={faEdit}
+                                    color="#4b4b4b"
+                                    onClick={() => populateForm(row)}
+                                />
+                            </button>
+                            <button
+                                className="ml-2"
+                                onClick={() => handleDeleteProduct(row)}>
+                                <FontAwesomeIcon
+                                    icon={faTrash}
+                                    color="#4b4b4b"
+                                />
+                            </button>
+                        </td>
+                    </tr>
+                ))}
                 </tbody>
             </table>
         </div>

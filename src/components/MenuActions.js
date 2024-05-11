@@ -1,7 +1,8 @@
 import React from 'react'
-import { Button, Menu, MenuItem } from '@material-ui/core'
 import axios from 'axios'
 import Swal from 'sweetalert2'
+import Button from "@/components/Button";
+import { Menu } from "@headlessui/react";
 
 axios.defaults.baseURL = process.env.NEXT_PUBLIC_BACKEND_URL
 
@@ -51,18 +52,6 @@ export default function MenuActions() {
         handleClose()
     }
 
-    // const handleExport = () => {
-    //     Swal.fire({
-    //         icon: 'success',
-    //         title: 'Arquivos exportados com sucesso',
-    //         showConfirmButton: false,
-    //         timer: 1500,
-    //     })
-    // }
-
-    // faz um export usando a fução exportar csv do meu menu actions
-
-    // }
     const handleExport = () => {
         axios
             .get('/api/products/export', {
@@ -101,9 +90,9 @@ export default function MenuActions() {
                 keepMounted
                 open={Boolean(anchorEl)}
                 onClose={handleClose}>
-                <MenuItem onClick={handleImport} style={{ fontSize: '0.8rem' }}>
+                <Menu onClick={handleImport} style={{ fontSize: '0.8rem' }}>
                     Importar CSV
-                </MenuItem>
+                </Menu>
                 <MenuItem onClick={handleExport} style={{ fontSize: '0.8rem' }}>
                     Exportar CSV
                 </MenuItem>

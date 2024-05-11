@@ -2,7 +2,9 @@ import ApplicationLogo from '@/components/ApplicationLogo'
 import Dropdown from '@/components/Dropdown'
 import Link from 'next/link'
 import NavLink from '@/components/NavLink'
-import ResponsiveNavLink, { ResponsiveNavButton } from '@/components/ResponsiveNavLink'
+import ResponsiveNavLink, {
+    ResponsiveNavButton,
+} from '@/components/ResponsiveNavLink'
 import { DropdownButton } from '@/components/DropdownLink'
 import { useAuth } from '@/hooks/auth'
 import { usePathname } from 'next/navigation'
@@ -36,7 +38,7 @@ const Navigation = ({ user }) => {
                             <NavLink
                                 href="/store"
                                 active={usePathname() === '/store'}>
-                                Produtos da Loja
+                                Produtos
                             </NavLink>
                         </div>
                     </div>
@@ -48,12 +50,7 @@ const Navigation = ({ user }) => {
                             width="48"
                             trigger={
                                 <button className="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 focus:outline-none transition duration-150 ease-in-out">
-                                    <div>
-                                        Sr(a){' '}
-                                        {user?.name.charAt(0).toUpperCase() +
-                                            user?.name.slice(1).toLowerCase()}
-                                        .
-                                    </div>
+                                    <div>{user?.name}</div>
 
                                     <div className="ml-1">
                                         <svg
@@ -118,6 +115,12 @@ const Navigation = ({ user }) => {
                             active={usePathname() === '/dashboard'}>
                             Dashboard
                         </ResponsiveNavLink>
+                        <ResponsiveNavLink
+                            href="/store"
+                            active={usePathname() === '/dashboard'}>
+                            Dashboard
+                        </ResponsiveNavLink>
+
                     </div>
 
                     {/* Responsive Settings Options */}
@@ -141,10 +144,7 @@ const Navigation = ({ user }) => {
 
                             <div className="ml-3">
                                 <div className="font-medium text-base text-gray-800">
-                                    Sr(a){' '}
-                                    {user?.name.charAt(0).toUpperCase() +
-                                        user?.name.slice(1).toLowerCase()}
-                                    .
+                                    {user?.name}
                                 </div>
                                 <div className="font-medium text-sm text-gray-500">
                                     {user?.email}

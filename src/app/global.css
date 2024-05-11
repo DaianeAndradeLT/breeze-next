@@ -3,9 +3,3 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-
-.custom-swal-form input,
-.custom-swal-form label {
-    margin-top: 5px;
-}

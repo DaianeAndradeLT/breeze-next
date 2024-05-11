@@ -4,6 +4,7 @@ import Button from '@/components/Button'
 import Input from '@/components/Input'
 import InputError from '@/components/InputError'
 import Label from '@/components/Label'
+import Link from 'next/link'
 import { useAuth } from '@/hooks/auth'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
@@ -46,11 +47,6 @@ const Login = () => {
     return (
         <>
             <AuthSessionStatus className="mb-4" status={status} />
-            <h1 className="text-center text-2xl font-bold mb-4">
-                Acesso Administrativo
-            </h1>
-
-            <AuthSessionStatus className="mb-4" status={status} />
             <form onSubmit={submitForm}>
                 {/* Email Address */}
                 <div>
@@ -71,7 +67,7 @@ const Login = () => {
 
                 {/* Password */}
                 <div className="mt-4">
-                    <Label htmlFor="password">Senha</Label>
+                    <Label htmlFor="password">Password</Label>
 
                     <Input
                         id="password"
@@ -83,7 +79,10 @@ const Login = () => {
                         autoComplete="current-password"
                     />
 
-                    <InputError messages={errors.password} className="mt-2" />
+                    <InputError
+                        messages={errors.password}
+                        className="mt-2"
+                    />
                 </div>
 
                 {/* Remember Me */}
@@ -102,12 +101,18 @@ const Login = () => {
                         />
 
                         <span className="ml-2 text-sm text-gray-600">
-                            Lembrar-me
+                            Remember me
                         </span>
                     </label>
                 </div>
 
                 <div className="flex items-center justify-end mt-4">
+                    <Link
+                        href="/forgot-password"
+                        className="underline text-sm text-gray-600 hover:text-gray-900">
+                        Forgot your password?
+                    </Link>
+
                     <Button className="ml-3">Login</Button>
                 </div>
             </form>

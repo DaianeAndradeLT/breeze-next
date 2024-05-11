@@ -3,9 +3,8 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import AppLayout from '@/app/(app)/layout'
 import Table from '@/components/Table'
-import MenuActions from '@/components/MenuActions'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlus } from '@fortawesome/free-solid-svg-icons'
+import { faPlus, faSave, faFile } from '@fortawesome/free-solid-svg-icons'
 import Swal from 'sweetalert2'
 
 export const metadata = {
@@ -56,9 +55,7 @@ const Store = () => {
 
                 // Verifica se todos os campos obrigatórios foram preenchidos
                 if (!title || !price || !description || !image || !category) {
-                    Swal.showValidationMessage(
-                        'Todos os campos são obrigatórios',
-                    )
+                    Swal.showValidationMessage('Todos os campos são obrigatórios')
                     return false
                 }
 
@@ -71,6 +68,11 @@ const Store = () => {
                             description,
                             image,
                             category,
+                        },
+                        {
+                            headers: {
+                                Authorization: `Bearer ${localStorage.getItem('token')}`,
+                            },
                         },
                     )
                     .then(response => response.data)
@@ -136,7 +138,6 @@ const Store = () => {
                                         onClick={handleCreateProduct}
                                         style={{ marginRight: '10px' }}
                                     />
-                                    <MenuActions />
                                 </div>
                             </div>
                             <br />
