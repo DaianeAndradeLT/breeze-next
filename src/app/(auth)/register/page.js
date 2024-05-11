@@ -36,7 +36,7 @@ const Page = () => {
         <form onSubmit={submitForm}>
             {/* Name */}
             <div>
-                <Label htmlFor="name">Name</Label>
+                <Label htmlFor="name">Nome</Label>
 
                 <Input
                     id="name"
@@ -69,7 +69,7 @@ const Page = () => {
 
             {/* Password */}
             <div className="mt-4">
-                <Label htmlFor="password">Password</Label>
+                <Label htmlFor="password">Senha</Label>
 
                 <Input
                     id="password"
@@ -87,7 +87,7 @@ const Page = () => {
             {/* Confirm Password */}
             <div className="mt-4">
                 <Label htmlFor="passwordConfirmation">
-                    Confirm Password
+                    Confirmar Senha
                 </Label>
 
                 <Input
@@ -111,10 +111,10 @@ const Page = () => {
                 <Link
                     href="/login"
                     className="underline text-sm text-gray-600 hover:text-gray-900">
-                    Already registered?
+                    Já está registrado?
                 </Link>
 
-                <Button className="ml-4">Register</Button>
+                <Button className="ml-4">Registrar</Button>
             </div>
         </form>
     )

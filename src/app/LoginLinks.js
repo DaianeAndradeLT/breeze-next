@@ -19,16 +19,16 @@ const LoginLinks = () => {
                 <>
                     <Link
                         href="/login"
-                        className="text-sm text-gray-700 underline"
+                        className="text-sm text-gray-700 underline text-gray-400"
                     >
                         Login
                     </Link>
 
                     <Link
                         href="/register"
-                        className="ml-4 text-sm text-gray-700 underline"
+                        className="ml-4 text-sm text-gray-700 underline text-gray-400"
                     >
-                        Register
+                        Registrar
                     </Link>
                 </>
             )}
