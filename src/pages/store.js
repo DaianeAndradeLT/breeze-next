@@ -88,7 +88,7 @@ const Store = () => {
 
     const fetchProducts = () => {
         axios
-            .get(url)
+            .get(url, {headers: {Authorization: `Bearer ${localStorage.getItem('token')}`,}})
             .then(response => {
                 setProducts(response.data.data)
             })
@@ -96,9 +96,10 @@ const Store = () => {
                 console.log(error)
             })
     }
+
     useEffect(() => {
         axios
-            .get(url)
+            .get(url, {headers: {Authorization: `Bearer ${localStorage.getItem('token')}`,}})
             .then(response => {
                 setProducts(response.data.data)
             })

@@ -1,8 +1,8 @@
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons'
-import axios from 'axios'
-import Swal from 'sweetalert2'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
+import axios from "axios";
+import Swal from "sweetalert2";
+import { useState } from "react";
 
 
 const Table = ({ columns, data }) => {
@@ -30,61 +30,69 @@ const Table = ({ columns, data }) => {
                 <input type="text" id="category" name="category" value="${row.Categoria}" class="w-full mt-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
             </div>
         </form>
-        `
+        `;
 
         Swal.fire({
-            title: 'Editar Produto',
+            title: "Editar Produto",
             html: html,
             showCancelButton: true,
-            confirmButtonText: 'Salvar',
-            cancelButtonText: 'Cancelar',
+            confirmButtonText: "Salvar",
+            cancelButtonText: "Cancelar",
             showLoaderOnConfirm: true,
             preConfirm: async () => {
-                const form = document.getElementById('edit-product-form');
+                const form = document.getElementById("edit-product-form");
                 const formData = new FormData(form);
                 const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/products/${row.Id}`;
                 try {
                     await axios.put(url, {
-                        title: formData.get('title'),
-                        price: formData.get('price'),
-                        description: formData.get('description'),
-                        image: formData.get('image'),
-                        category: formData.get('category'),
-                    })
-                    return true
+                        title: formData.get("title"),
+                        price: formData.get("price"),
+                        description: formData.get("description"),
+                        image: formData.get("image"),
+                        category: formData.get("category")
+                    }, {
+                        headers: {
+                            "Authorization": "Bearer " + localStorage.getItem("token")
+                        }
+                    });
+                    return true;
                 } catch (error) {
                     Swal.showValidationMessage(error.response.data.message);
-                    return false
+                    return false;
                 }
-            },
+            }
         }).then(result => {
             if (result.isConfirmed) {
-                Swal.fire('Produto Editado', '', 'success').then(() => {
-                    window.location.reload()
-                })
+                Swal.fire("Produto Editado", "", "success").then(() => {
+                    window.location.reload();
+                });
             }
-        })
+        });
     }
 
     function handleDeleteProduct(row) {
-        const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/products/${row.Id}`
+        const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/products/${row.Id}`;
         Swal.fire({
-            title: 'Excluir Produto',
-            text: 'Tem certeza que deseja excluir este produto?',
+            title: "Excluir Produto",
+            text: "Tem certeza que deseja excluir este produto?",
             showCancelButton: true,
-            confirmButtonText: 'Sim',
-            cancelButtonText: 'Não',
+            confirmButtonText: "Sim",
+            cancelButtonText: "Não",
             showLoaderOnConfirm: true,
             preConfirm: async () => {
                 try {
-                    await axios.delete(url)
+                    await axios.delete(url, {
+                        headers: {
+                            "Authorization": "Bearer " + localStorage.getItem("token")
+                        }
+                    });
                 } catch (error) {
                     Swal.showValidationMessage(`Request failed: ${error}`);
                 }
-            },
+            }
         }).then(() => {
-            window.location.reload()
-        })
+            window.location.reload();
+        });
     }
 
     return (
@@ -109,15 +117,15 @@ const Table = ({ columns, data }) => {
                     <tr key={index} className="hover:bg-gray-300">
                         {columns.map((column, colIndex) => {
                             const [isExpanded, setIsExpanded] = useState(
-                                false,
-                            )
+                                false
+                            );
                             const textValue =
-                                typeof row[column] === 'string'
+                                typeof row[column] === "string"
                                     ? row[column]
-                                    : row[column].toString()
+                                    : row[column].toString();
                             const text = isExpanded
                                 ? textValue
-                                : `${textValue.substring(0, 20)}...`
+                                : `${textValue.substring(0, 20)}...`;
                             return (
                                 <td
                                     key={colIndex}
@@ -128,10 +136,11 @@ const Table = ({ columns, data }) => {
                                     }>
                                     {text}
                                 </td>
-                            )
+                            );
                         })}
                         <td className="px-2 py-1 whitespace-normal max-w-xs">
-                            <button className={'ml-2'} onClick={() => {}}>
+                            <button className={"ml-2"} onClick={() => {
+                            }}>
                                 <FontAwesomeIcon
                                     icon={faEdit}
                                     color="#4b4b4b"
@@ -152,7 +161,7 @@ const Table = ({ columns, data }) => {
                 </tbody>
             </table>
         </div>
-    )
-}
+    );
+};
 
-export default Table
+export default Table;

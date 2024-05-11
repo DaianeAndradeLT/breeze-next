@@ -32,7 +32,7 @@ export default function MenuActions() {
 
         try {
             await axios.post('/api/products/import', formData, {
-                headers: { 'Content-Type': `multipart/form-data` },
+                headers: { 'Content-Type': `multipart/form-data`, "Authorization": "Bearer " + localStorage.getItem("token")},
             })
             Swal.fire({
                 icon: 'success',
@@ -56,6 +56,7 @@ export default function MenuActions() {
         axios
             .get('/api/products/export', {
                 responseType: 'blob',
+                headers: {"Authorization": "Bearer " + localStorage.getItem("token")}
             })
             .then(response => {
                 const url = window.URL.createObjectURL(
