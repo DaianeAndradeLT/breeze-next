@@ -131,9 +131,7 @@ const Table = ({ columns, data }) => {
                                     key={colIndex}
                                     className="px-2 py-1 whitespace-normal max-w-xs cursor-pointer"
                                     title={textValue}
-                                    onClick={() =>
-                                        setIsExpanded(!isExpanded)
-                                    }>
+                                    onClick={() => setIsExpanded(!isExpanded) }>
                                     {text}
                                 </td>
                             );
