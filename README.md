@@ -1,91 +1,35 @@
-# Laravel Breeze - Next.js Edition ▲
+# Documentação: Configuração e Execução do Projeto
 
-## Introduction
+Este guia fornece instruções passo a passo para configurar e executar o projeto localmente.
 
-This repository is an implementation of the [Laravel Breeze](https://laravel.com/docs/starter-kits) application / authentication starter kit frontend in [Next.js](https://nextjs.org). All of the authentication boilerplate is already written for you - powered by [Laravel Sanctum](https://laravel.com/docs/sanctum), allowing you to quickly begin pairing your beautiful Next.js frontend with a powerful Laravel backend.
+Este projeto é composto por duas partes, sendo elas
+- Repositório do Backend: [BackEnd](https://github.com/DaianeAndradeLT/laravel-api-test)
+- Repositório do Frontend: [Front](https://github.com/DaianeAndradeLT/breeze-next)
+## Pré-requisitos
 
-## Official Documentation
+Antes de iniciar, certifique-se de ter os seguintes requisitos instalados em sua máquina:
 
-### Installation
+- [PHP](https://www.php.net/) >= 8.2
+- [Composer](https://getcomposer.org/)
+- [Node.js](https://nodejs.org/) >= 12.x
+- [npm](https://www.npmjs.com/) ou [Yarn](https://yarnpkg.com/)
+- Um servidor de banco de dados MySQL
 
-First, create a Next.js compatible Laravel backend by installing Laravel Breeze into a [fresh Laravel application](https://laravel.com/docs/installation) and installing Breeze's API scaffolding:
+## Configuração do FrontEnd
 
-```bash
-# Create the Laravel application...
-laravel new next-backend
+1. Clone o repositório do projeto: `git clone https://github.com/DaianeAndradeLT/laravel-api-test`
 
-cd next-backend
+2. Navegue até o diretório do projeto: `cd <diretorio_do_projeto>`
 
-# Install Breeze and dependencies...
-composer require laravel/breeze --dev
+3. Instale as dependências:`npm install`
 
-php artisan breeze:install api
+4. Crie um arquivo .env baseado no exemplo fornecido em .env.example (por padrão a url do backend já está definida no 127.0.0.1:8000, provavelmente você não vai precisar alterar nada )
 
-# Run database migrations...
-php artisan migrate
-```
+5. Inicie o servidor: `npm run dev`
 
-Next, ensure that your application's `APP_URL` and `FRONTEND_URL` environment variables are set to `http://localhost:8000` and `http://localhost:3000`, respectively.
+## Acesso ao Projeto
 
-After defining the appropriate environment variables, you may serve the Laravel application using the `serve` Artisan command:
+Se tudo correr bem, esperamos que os sevirdores estejam rodando em:
 
-```bash
-# Serve the application...
-php artisan serve
-```
-
-Next, clone this repository and install its dependencies with `yarn install` or `npm install`. Then, copy the `.env.example` file to `.env.local` and supply the URL of your backend:
-
-```
-NEXT_PUBLIC_BACKEND_URL=http://localhost:8000
-```
-
-Finally, run the application via `npm run dev`. The application will be available at `http://localhost:3000`:
-
-```
-npm run dev
-```
-
-> Note: Currently, we recommend using `localhost` during local development of your backend and frontend to avoid CORS "Same-Origin" issues.
-
-### Authentication Hook
-
-This Next.js application contains a custom `useAuth` React hook, designed to abstract all authentication logic away from your pages. In addition, the hook can be used to access the currently authenticated user:
-
-```js
-const ExamplePage = () => {
-    const { logout, user } = useAuth({ middleware: 'auth' })
-
-    return (
-        <>
-            <p>{user?.name}</p>
-
-            <button onClick={logout}>Sign out</button>
-        </>
-    )
-}
-
-export default ExamplePage
-```
-
-> Note: You will need to use [optional chaining](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining) (`user?.name` instead of `user.name`) when accessing properties on the user object to account for Next.js's initial server-side render.
-
-### Named Routes
-
-For convenience, [Ziggy](https://github.com/tighten/ziggy#spas-or-separate-repos) may be used to reference your Laravel application's named route URLs from your React application.
-
-## Contributing
-
-Thank you for considering contributing to Breeze Next! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-Please review [our security policy](https://github.com/laravel/breeze-next/security/policy) on how to report security vulnerabilities.
-
-## License
-
-Laravel Breeze Next is open-sourced software licensed under the [MIT license](LICENSE.md).
+- Frontend: http://localhost:3000
+- Backend: http://localhost:8000
