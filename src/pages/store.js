@@ -3,13 +3,9 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import AppLayout from "@/app/(app)/layout";
 import Table from "@/components/Table";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-    faPlus,
-    faFileArrowDown,
-    faFileArrowUp, faFileExport, faFileMedicalAlt, faCloudDownload
-} from "@fortawesome/free-solid-svg-icons";
 import Swal from "sweetalert2";
+import H3 from "@/components/Title";
+import Header from "@/app/(app)/Header";
 
 export const metadata = {
     title: "Loja Virtual"
@@ -53,14 +49,14 @@ const Store = () => {
             Swal.fire({
                 icon: "success",
                 title: "Arquivos importados com sucesso",
-                showConfirmButton: false,
+                showConfirmButton: true,
                 timer: 1500
-            });
+            }).then(() => { window.location.reload(); })
         } catch (error) {
             Swal.fire({
                 icon: "error",
                 title: "Falha na importação",
-                showConfirmButton: false,
+                showConfirmButton: true,
                 timer: 1500
             });
         }
@@ -101,9 +97,9 @@ const Store = () => {
             .then(response => {
                 Swal.fire({
                     icon: "success",
-                    title: "",
-                    showConfirmButton: false
-                });
+                    title: "Produtos migrados com sucesso",
+                    showConfirmButton: true
+                }).then(() => { window.location.reload(); });
             });
     };
 
@@ -162,11 +158,13 @@ const Store = () => {
             }
         }).then(result => {
             if (result.isConfirmed) {
-                fetchProducts();
-                Swal.fire("Produto Criado", "", "success");
+                Swal.fire("Produto Criado", "", "success").then(() => {
+                    window.location.reload();
+                });
             }
         });
     };
+
     const fetchProducts = () => {
         axios
             .get(url, {
@@ -194,36 +192,38 @@ const Store = () => {
         fetchProducts();
     }, []);
 
-    return (
-        <AppLayout>
-            <input type="file" ref={fileInputRef} style={{ display: "none" }} accept=".csv"
-                   onChange={handleFileChange} />
-            <div className="py-12">
-                <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                        <div className="p-6 bg-white border-b border-gray-200">
-                            <div className="flex justify-between items-center">
-                                <h1 className="font-bold text-center">
-                                    Lista de Produtos
-                                </h1>
-                                <div className="" style={{ display: "flex", alignItems: "center" }}>
-                                    <FontAwesomeIcon icon={faPlus} onClick={handleCreateProduct}
-                                                     style={{ marginRight: "10px" }} />
-                                    <FontAwesomeIcon icon={faFileArrowUp} onClick={handleImport}
-                                                     style={{ marginRight: "10px" }} />
-                                    <FontAwesomeIcon icon={faFileArrowDown} onClick={handleExport}
-                                                     style={{ marginRight: "10px" }} />
-                                    <FontAwesomeIcon icon={faCloudDownload} onClick={handleMigrate}
-                                                     style={{ marginRight: "10px" }} />
+        return (
+            <AppLayout>
+                <Header title="Produtos no Estoque" />
+                <input type="file" ref={fileInputRef} style={{ display: "none" }} accept=".csv"
+                       onChange={handleFileChange} />
+                <div className="py-12">
+                    <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                        <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                            <div className="p-6 bg-white border-b border-gray-200">
+                                <div className="flex justify-between items-center">
+                                    <div className="" style={{ display: "flex", alignItems: "center" }}>
+                                        <button onClick={handleCreateProduct} className="bg-blue-500 text-sm hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2">
+                                            Criar Produto
+                                        </button>
+                                        <button onClick={handleImport} className="bg-gray-800 text-sm hover:bg-gray-600 text-white font-bold py-2 px-4 rounded mr-2">
+                                            Importar
+                                        </button>
+                                        <button onClick={handleExport} className="bg-gray-800 text-sm hover:bg-gray-600 text-white font-bold py-2 px-4 rounded mr-2">
+                                            Exportar
+                                        </button>
+                                        <button onClick={handleMigrate} className="bg-gray-800 text-sm hover:bg-gray-600 text-white font-bold py-2 px-4 rounded mr-2">
+                                            Importar da API
+                                        </button>
+                                    </div>
                                 </div>
+                                <br />
+                                <Table columns={columns} data={data} />
                             </div>
-                            <br />
-                            <Table columns={columns} data={data} />
                         </div>
                     </div>
                 </div>
-            </div>
-        </AppLayout>
-    );
-};
-export default Store;
+            </AppLayout>
+        );
+    };
+    export default Store;

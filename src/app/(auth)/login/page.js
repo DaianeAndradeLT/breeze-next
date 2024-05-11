@@ -9,6 +9,7 @@ import { useAuth } from '@/hooks/auth'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import AuthSessionStatus from '@/app/(auth)/AuthSessionStatus'
+import H3 from '@/components/Title'
 
 const Login = () => {
     const router = useRouter()
@@ -47,6 +48,9 @@ const Login = () => {
     return (
         <>
             <AuthSessionStatus className="mb-4" status={status} />
+            <H3 className="alguma-classe-css">Acesso de Administrador</H3>
+            <p className="text-center text-sm text-gray-400">Faça login para acessar o painel administrativo.</p>
+            <br/>
             <form onSubmit={submitForm}>
                 {/* Email Address */}
                 <div>

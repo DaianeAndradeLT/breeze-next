@@ -1,7 +1,7 @@
 import '@/app/global.css'
 
 export const metadata = {
-    title: 'Laravel',
+    title: 'Loja - Painel Administrativo    ',
 }
 const RootLayout = ({ children }) => {
     return (

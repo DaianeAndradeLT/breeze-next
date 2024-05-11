@@ -41,7 +41,7 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
         setErrors([]);
         setStatus(null);
 
-        axios
+        await axios
             .post("/login", props)
             .then(() => mutate())
             .catch(error => {
@@ -50,9 +50,10 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
                 setErrors(error.response.data.errors);
             });
 
-        axios.post("/api/token", props).then(response => {
-            localStorage.setItem("token", response.data.token);
-        });
+        axios.post("/api/token", props, { xsrfCookieName: "XSRF-TOKEN" })
+            .then(response => {
+                localStorage.setItem("token", response.data.token);
+            });
     };
 
     const forgotPassword = async ({ setErrors, setStatus, email }) => {

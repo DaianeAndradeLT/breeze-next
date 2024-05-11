@@ -8,7 +8,7 @@ const NotFoundPage = () => {
                     </div>
 
                     <div className="ml-4 text-lg text-gray-500 uppercase tracking-wider">
-                        Not Found
+                        Não encontrado
                     </div>
                 </div>
             </div>
