@@ -53,7 +53,9 @@ const Table = ({ columns, data }) => {
                     }, {
                         headers: {
                             "Authorization": "Bearer " + localStorage.getItem("token")
-                        }
+                        },
+                        xsrfCookieName: "XSRF-TOKEN"
+
                     });
                     return true;
                 } catch (error) {
@@ -84,7 +86,8 @@ const Table = ({ columns, data }) => {
                     await axios.delete(url, {
                         headers: {
                             "Authorization": "Bearer " + localStorage.getItem("token")
-                        }
+                        },
+                        xsrfCookieName: "XSRF-TOKEN"
                     });
                 } catch (error) {
                     Swal.showValidationMessage(`Request failed: ${error}`);
